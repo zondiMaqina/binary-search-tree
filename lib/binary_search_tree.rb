@@ -44,7 +44,10 @@ class Tree
     end
     current_node.left = new_node if value < current_node.value
     current_node.right = new_node if value > current_node.value
-    @root
+  end
+
+  def delete(value)
+    
   end
 end
 array = [1, 2, 3, 4, 5, 6, 7]
