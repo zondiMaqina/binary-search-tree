@@ -8,8 +8,9 @@ class Node
     @right = right
   end
 end
-
+ 
 class Tree
+  attr_accessor :root
   def initialize(array)
     @root = build_tree(array, 0, array.size - 1)
   end
@@ -25,12 +26,28 @@ class Tree
     return root
   end
 
-   def pretty_print(node = @root, prefix = '', is_left = true)
-     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
-     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-   end
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+
+  def insert(value)
+    new_node = Node.new(value)
+    current_node = @root
+    while current_node.left != nil || current_node.right != nil
+      if value < current_node.value
+        current_node = current_node.left
+      elsif value > current_node.value
+        current_node = current_node.right
+      end
+    end
+    current_node.left = new_node if value < current_node.value
+    current_node.right = new_node if value > current_node.value
+    @root
+  end
 end
-array = [1, 2, 3, 4]
+array = [1, 2, 3, 4, 5, 6, 7]
 tree = Tree.new(array)
+tree.insert(8)
 p tree.pretty_print
