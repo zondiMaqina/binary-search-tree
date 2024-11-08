@@ -32,7 +32,7 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def insert(value)
+  def insert(value) # does not allow dupliactes
     new_node = Node.new(value)
     current_node = @root
     while current_node.left != nil || current_node.right != nil
@@ -49,5 +49,5 @@ class Tree
 end
 array = [1, 2, 3, 4, 5, 6, 7]
 tree = Tree.new(array)
-tree.insert(8)
+tree.insert(10)
 p tree.pretty_print
