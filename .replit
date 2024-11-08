@@ -1,4 +1,5 @@
-run = "ruby"
+run = "ruby lib/binary_search_tree.rb"
+modules = ["bun-1.1"]
 [nix]
 channel = "stable-24_05"
 
