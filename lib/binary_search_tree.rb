@@ -24,7 +24,13 @@ class Tree
     root.right = build_tree(sorted_array, mid + 1, endpoint)
     return root
   end
+
+   def pretty_print(node = @root, prefix = '', is_left = true)
+     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
+     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+   end
 end
 array = [1, 2, 3, 4]
 tree = Tree.new(array)
-p tree
+p tree.pretty_print
