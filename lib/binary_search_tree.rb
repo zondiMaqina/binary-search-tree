@@ -124,8 +124,16 @@ class Tree
     post_order(root.right) # goes to right sub-tree
     puts root.value 
   end
+
+  def height(node, height = 0)
+    if node == nil
+      return -1
+    end
+    left_height = height(node.left, height + 1)
+    right_height = height(node.right, height + 1)
+    [left_height, right_height].max + 1
+  end
 end
 
-array = [1, 2, 3, 4]
+array = [1, 2, 3, 4, 5, 6, 10, 11]
 tree = Tree.new(array)
-tree.post_order
