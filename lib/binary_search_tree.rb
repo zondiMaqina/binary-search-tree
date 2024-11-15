@@ -45,27 +45,42 @@ class Tree
     current_node.left = new_node if value < current_node.value
     current_node.right = new_node if value > current_node.value
   end
+
+  def get_replacement(current_node)
+    current_node = current_node.right
+    while current_node != nil && current_node.left != nil
+      current_node = current_node.left
+    end
+    current_node
+  end
   
   def delete(root = @root, value)
-    return root if root.nil?
-    # searches for the node wanted first
-    if root.value < value
-      root = delete(root.right, value)
-    elsif root.value > value
-      root = delete(root.left, value)
-    end
-    # When the located node has either one child or none
-    if root.left.nil?
-      return root.right
-    elsif root.right.nil?
-      return root.left
-    end
-    # When the located node has two children
+      # Base case: If the root is nil, return nil
+      return root if root.nil?
+
+      if root.value > value
+        root.left = delete(root.left, value)
+      elsif root.value < value
+        root.right = delete(root.right, value)
+      else
+        if root.left.nil? # Case 1: No left child, return right subtree
+          return root.right
+        elsif root.right.nil? # Case 2: No right child, return left subtree
+
+          return root.left
+        else
+          # Case 3: Both children present, find the inorder successor
+          succ = get_replacement(root)
+          root.value = succ.value
+          root.right = delete(root.right, succ.value)
+        end
+      end
+      return root
   end
 end
-array = [1, 2, 3, 4, 5, 6, 7]
+array = [1, 2, 3]
 tree = Tree.new(array)
-tree.insert(10)
+tree.delete(2)
 p tree.pretty_print
 
 # search for node wanted to be deleted, if not found return nil
