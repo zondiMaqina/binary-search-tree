@@ -96,8 +96,19 @@ class Tree
     queue.shift
     level_order(queue[0], queue, true)
   end
+
+  def in_order(root = @root)
+    if root == nil
+      return
+    end
+    in_order(root.left) # starts with fursthest left node (left sub-tree)
+    puts root.value # prints node
+    in_order(root.right) # goes to right sub-tree
+  end
+
 end
 
 array = [1, 2, 3]
 tree = Tree.new(array)
-tree.level_order
+tree.in_order
+
