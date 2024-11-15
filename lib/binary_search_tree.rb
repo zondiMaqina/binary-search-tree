@@ -115,8 +115,17 @@ class Tree
     pre_order(root.left) # goes to left sub-tree
     pre_order(root.right) # goes to right sub-tree
   end
+
+  def post_order(root = @root)
+    if root == nil
+      return
+    end
+    post_order(root.left) # goes to left sub-tree
+    post_order(root.right) # goes to right sub-tree
+    puts root.value 
+  end
 end
 
 array = [1, 2, 3, 4]
 tree = Tree.new(array)
-tree.pre_order
+tree.post_order
