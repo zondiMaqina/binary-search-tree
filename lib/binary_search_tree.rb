@@ -161,8 +161,23 @@ class Tree
   
     check_height(root) != -1
   end
+
+  def collect(root = @root, values = [])
+    if root == nil
+      return
+    end
+    collect(root.left, values) # starts with fursthest left node (left sub-tree)
+    values << root.value # prints node
+    collect(root.right, values) # goes to right sub-tree
+    return values
+  end
+
+  def rebalance
+    new_array = collect
+    @root = build_tree(new_array, 0, new_array.size - 1)
+  end
 end
 
 array = [1, 2, 3, 4, 5]
 tree = Tree.new(array)
-p tree.balanced?
+p tree.rebalance
