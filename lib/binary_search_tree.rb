@@ -46,11 +46,19 @@ class Tree
     current_node.right = new_node if value > current_node.value
   end
 
-  def delete(value)
-    
+  def delete(root = @root, value)
+    return root if root.nil?
+    # searches for the node wanted first
+    if root.value < value
+      root = delete(root.right, value)
+    elsif root.value > value
+      root = delete(root.left, value)
+    end
   end
 end
 array = [1, 2, 3, 4, 5, 6, 7]
 tree = Tree.new(array)
 tree.insert(10)
 p tree.pretty_print
+
+# search for node wanted to be deleted, if not found return nil

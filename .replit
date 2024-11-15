@@ -1,7 +1,7 @@
 run = "ruby lib/binary_search_tree.rb"
-modules = ["bun-1.1"]
+modules = ["ruby-3.2", "nix"]
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "ruby"]
+run = ["sh", "-c", "ruby lib/binary_search_tree.rb"]
