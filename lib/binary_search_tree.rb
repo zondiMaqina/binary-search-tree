@@ -133,7 +133,20 @@ class Tree
     right_height = height(node.right, height + 1)
     [left_height, right_height].max + 1
   end
+
+  def depth(value, root = @root, depth = 0)
+    return nil if root == nil
+    return depth + 1 if root.value == value
+    if root.value > value
+      depth = depth(value, root.left, depth + 1)
+    elsif root.value < value
+      depth = depth(value, root.right, depth + 1)
+    end
+  end
 end
 
 array = [1, 2, 3, 4, 5, 6, 10, 11]
 tree = Tree.new(array)
+p tree.depth(11)
+# takes in the root as first node
+# searches on the left
