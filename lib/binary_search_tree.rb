@@ -143,7 +143,26 @@ class Tree
       depth = depth(value, root.right, depth + 1)
     end
   end
+
+  def balanced?(node = @root)
+    def check_height(node)
+      return 0 if node.nil?
+  
+      left_height = check_height(node.left)
+      return -1 if left_height == -1 # If left subtree is unbalanced
+  
+      right_height = check_height(node.right)
+      return -1 if right_height == -1 # If right subtree is unbalanced
+  
+      return -1 if (left_height - right_height).abs > 1 # Check balance
+  
+      [left_height, right_height].max + 1 # Return the height
+    end
+  
+    check_height(root) != -1
+  end
 end
 
-array = [1, 2, 3, 4, 5, 6, 10, 11]
+array = [1, 2, 3, 4, 5]
 tree = Tree.new(array)
+p tree.balanced?
