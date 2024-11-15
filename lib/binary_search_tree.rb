@@ -106,9 +106,17 @@ class Tree
     in_order(root.right) # goes to right sub-tree
   end
 
+
+  def pre_order(root = @root)
+    if root == nil
+      return
+    end
+    puts root.value # takes root as first node
+    pre_order(root.left) # goes to left sub-tree
+    pre_order(root.right) # goes to right sub-tree
+  end
 end
 
-array = [1, 2, 3]
+array = [1, 2, 3, 4]
 tree = Tree.new(array)
-tree.in_order
-
+tree.pre_order
