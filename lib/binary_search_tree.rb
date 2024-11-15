@@ -55,8 +55,7 @@ class Tree
   end
   
   def delete(root = @root, value)
-      # Base case: If the root is nil, return nil
-      return root if root.nil?
+      return root if root.nil? # Base case: If the root is nil, return nil
 
       if root.value > value
         root.left = delete(root.left, value)
@@ -66,7 +65,6 @@ class Tree
         if root.left.nil? # Case 1: No left child, return right subtree
           return root.right
         elsif root.right.nil? # Case 2: No right child, return left subtree
-
           return root.left
         else
           # Case 3: Both children present, find the inorder successor
@@ -77,10 +75,19 @@ class Tree
       end
       return root
   end
+
+  def find(root = @root, value)
+    return root if root.nil?
+    if root.value < value
+      root = find(root.right, value)
+    elsif root.value > value
+      root = find(root.left, value)
+    end
+    return root
+  end
 end
+
 array = [1, 2, 3]
 tree = Tree.new(array)
 tree.delete(2)
-p tree.pretty_print
-
-# search for node wanted to be deleted, if not found return nil
+p tree.find(3)
