@@ -85,9 +85,19 @@ class Tree
     end
     return root
   end
+
+  def level_order(root = @root, queue = [], visited = false)
+    return if queue.empty? && visited == true
+    
+    queue << root if visited == false
+    puts queue[0].value
+    queue << root.left if root.left != nil
+    queue << root.right if root.right != nil
+    queue.shift
+    level_order(queue[0], queue, true)
+  end
 end
 
 array = [1, 2, 3]
 tree = Tree.new(array)
-tree.delete(2)
-p tree.find(3)
+tree.level_order
