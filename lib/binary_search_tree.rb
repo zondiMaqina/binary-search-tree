@@ -147,6 +147,3 @@ end
 
 array = [1, 2, 3, 4, 5, 6, 10, 11]
 tree = Tree.new(array)
-p tree.depth(11)
-# takes in the root as first node
-# searches on the left
