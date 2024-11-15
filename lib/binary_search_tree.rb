@@ -45,7 +45,7 @@ class Tree
     current_node.left = new_node if value < current_node.value
     current_node.right = new_node if value > current_node.value
   end
-
+  
   def delete(root = @root, value)
     return root if root.nil?
     # searches for the node wanted first
@@ -54,6 +54,13 @@ class Tree
     elsif root.value > value
       root = delete(root.left, value)
     end
+    # When the located node has either one child or none
+    if root.left.nil?
+      return root.right
+    elsif root.right.nil?
+      return root.left
+    end
+    # When the located node has two children
   end
 end
 array = [1, 2, 3, 4, 5, 6, 7]
